@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "课堂实录视频选择器",
+  "version": "1.0.0",
+  "description": "在安徽师范大学课堂实录页面总览所有课次和相机视角，并按勾选结果批量下载。",
+  "permissions": ["downloads"],
+  "host_permissions": [
+    "https://mlb.ahnu.edu.cn/*",
+    "https://dbfw.ahnu.edu.cn/*",
+    "https://dbfw.ahnu.edu.cn:4432/*"
+  ],
+  "action": {
+    "default_title": "打开课堂实录视频选择器"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mlb.ahnu.edu.cn/*"],
+      "js": ["content.js"],
+      "css": ["panel.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
