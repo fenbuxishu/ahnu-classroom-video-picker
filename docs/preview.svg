@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">AHNU 课堂实录助手界面预览</title>
+  <desc id="desc">课堂实录页面右侧展开视频选择面板，显示课次、教师相机、学生相机和下载选择。</desc>
+  <defs>
+    <linearGradient id="top" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1f75e8"/>
+      <stop offset="1" stop-color="#3457c8"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#203f9f"/>
+      <stop offset="1" stop-color="#5537bd"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="-8" dy="10" stdDeviation="14" flood-color="#17264e" flood-opacity=".2"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="680" rx="22" fill="#eef1f7"/>
+  <rect x="18" y="18" width="1164" height="644" rx="15" fill="#fff" stroke="#dfe3ec"/>
+  <rect x="18" y="18" width="1164" height="50" rx="15" fill="#f7f8fb"/>
+  <circle cx="47" cy="43" r="7" fill="#ff6b60"/>
+  <circle cx="69" cy="43" r="7" fill="#ffbd45"/>
+  <circle cx="91" cy="43" r="7" fill="#35c759"/>
+  <rect x="130" y="30" width="650" height="26" rx="13" fill="#fff" stroke="#e3e6ed"/>
+  <text x="153" y="48" fill="#8790a3" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12">mlb.ahnu.edu.cn / 课堂实录 / 示例课程</text>
+
+  <rect x="18" y="68" width="1164" height="72" fill="url(#top)"/>
+  <text x="46" y="100" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="20" font-weight="700">示例课程</text>
+  <text x="46" y="123" fill="#d8e9ff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12">2026-09-02 09:50–10:35 · 课堂实录</text>
+  <rect x="515" y="86" width="96" height="38" rx="19" fill="#fff"/>
+  <text x="545" y="110" fill="#3157d5" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="14" font-weight="700">点播</text>
+
+  <rect x="40" y="164" width="700" height="348" rx="10" fill="#11151d"/>
+  <circle cx="390" cy="323" r="35" fill="#3157d5" opacity=".95"/>
+  <path d="M382 305 L410 323 L382 341 Z" fill="#fff"/>
+  <text x="348" y="382" fill="#aab2c2" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13">课堂视频播放器</text>
+  <rect x="40" y="528" width="214" height="104" rx="8" fill="#e6e9ef"/>
+  <rect x="269" y="528" width="214" height="104" rx="8" fill="#e6e9ef"/>
+  <rect x="498" y="528" width="214" height="104" rx="8" fill="#e6e9ef"/>
+  <text x="59" y="556" fill="#768094" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12">00:01</text>
+  <text x="288" y="556" fill="#768094" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12">02:12</text>
+  <text x="517" y="556" fill="#768094" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12">05:34</text>
+
+  <g filter="url(#shadow)">
+    <rect x="760" y="68" width="422" height="594" fill="#f6f7fa"/>
+    <rect x="760" y="68" width="422" height="124" fill="url(#panel)"/>
+    <text x="784" y="94" fill="#cbd5ff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11" font-weight="700" letter-spacing="1.4">AHNU 课堂实录助手</text>
+    <text x="784" y="128" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="23" font-weight="750">示例课程</text>
+    <text x="784" y="153" fill="#d8dcfb" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13">9 个课次 · 18 个可下载视角</text>
+    <circle cx="1142" cy="101" r="17" fill="#fff" opacity=".15"/>
+    <path d="M1136 95 L1148 107 M1148 95 L1136 107" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+
+    <rect x="760" y="192" width="422" height="48" fill="#fff"/>
+    <text x="784" y="221" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13">已读取全部 9 个课次</text>
+    <rect x="1080" y="203" width="78" height="27" rx="7" fill="#fff" stroke="#e1e4ec"/>
+    <text x="1093" y="221" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12">重新读取</text>
+
+    <rect x="760" y="240" width="422" height="45" fill="#fbfbfd" stroke="#e7e9ef"/>
+    <rect x="784" y="255" width="14" height="14" rx="3" fill="#fff" stroke="#b9c0cf"/>
+    <text x="807" y="267" fill="#394156" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="650">全选</text>
+    <rect x="846" y="250" width="82" height="25" rx="7" fill="#fff" stroke="#e1e4ec"/>
+    <text x="857" y="267" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">选教师相机</text>
+    <rect x="936" y="250" width="82" height="25" rx="7" fill="#fff" stroke="#e1e4ec"/>
+    <text x="947" y="267" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">选学生相机</text>
+
+    <rect x="776" y="301" width="390" height="154" rx="12" fill="#fff" stroke="#e1e4ec"/>
+    <rect x="791" y="318" width="16" height="16" rx="4" fill="#fff" stroke="#b9c0cf"/>
+    <rect x="819" y="309" width="32" height="32" rx="9" fill="#edf0ff"/>
+    <text x="827" y="330" fill="#3157d5" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="800">01</text>
+    <text x="864" y="323" fill="#242c41" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="14" font-weight="700">2026-09-02 09:50</text>
+    <text x="864" y="341" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">第3节 · 2 个视角</text>
+    <line x1="776" y1="356" x2="1166" y2="356" stroke="#eceef3"/>
+    <rect x="793" y="374" width="15" height="15" rx="3" fill="#3157d5"/>
+    <path d="M797 381 L801 385 L806 377" fill="none" stroke="#fff" stroke-width="1.8"/>
+    <rect x="821" y="365" width="30" height="30" rx="9" fill="#7c4dff"/>
+    <text x="829" y="385" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="800">师</text>
+    <text x="863" y="378" fill="#2b3348" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="700">教师相机1</text>
+    <text x="863" y="393" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">视角 1 · 50:00</text>
+    <text x="1113" y="383" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">785 MB</text>
+    <line x1="792" y1="407" x2="1150" y2="407" stroke="#f0f1f5"/>
+    <rect x="793" y="424" width="15" height="15" rx="3" fill="#fff" stroke="#b9c0cf"/>
+    <rect x="821" y="415" width="30" height="30" rx="9" fill="#0a8f74"/>
+    <text x="829" y="435" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="800">生</text>
+    <text x="863" y="428" fill="#2b3348" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="700">学生相机1</text>
+    <text x="863" y="443" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">视角 3 · 50:07</text>
+    <text x="1113" y="433" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">425 MB</text>
+
+    <rect x="776" y="468" width="390" height="82" rx="12" fill="#fff" stroke="#e1e4ec"/>
+    <rect x="791" y="486" width="16" height="16" rx="4" fill="#fff" stroke="#b9c0cf"/>
+    <rect x="819" y="477" width="32" height="32" rx="9" fill="#edf0ff"/>
+    <text x="827" y="498" fill="#3157d5" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="800">02</text>
+    <text x="864" y="490" fill="#242c41" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="14" font-weight="700">2026-09-02 10:40</text>
+    <text x="864" y="509" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">第4节 · 2 个视角</text>
+    <text x="1108" y="496" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">展开查看</text>
+
+    <rect x="760" y="577" width="422" height="85" fill="#fff"/>
+    <text x="784" y="605" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">已选 1/18 个，约 785 MB</text>
+    <rect x="996" y="593" width="162" height="43" rx="11" fill="#3157d5"/>
+    <text x="1025" y="620" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13" font-weight="700">下载已选 1 个视频</text>
+  </g>
+</svg>

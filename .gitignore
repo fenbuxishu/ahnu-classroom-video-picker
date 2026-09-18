@@ -1,2 +1,4 @@
 .DS_Store
 *.zip
+*.zip.sha256
+dist/

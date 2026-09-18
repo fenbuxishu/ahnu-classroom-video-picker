@@ -1,0 +1,41 @@
+name: Bug report
+description: 报告可稳定复现的问题
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: 请先删除截图和日志中的姓名、学号、Cookie 及带鉴权参数的视频地址。
+  - type: input
+    id: version
+    attributes:
+      label: 扩展版本
+      placeholder: 例如 1.0.1
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: 浏览器与版本
+      placeholder: 例如 Chrome 151 / macOS
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请提供最短、稳定的复现过程。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+    validations:
+      required: true

@@ -1,0 +1,35 @@
+name: Validate extension
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check content.js
+          node --check background.js
+
+      - name: Validate manifest
+        run: jq empty manifest.json
+
+      - name: Ensure no temporary video credentials are committed
+        run: |
+          if grep -R --exclude-dir=.git --exclude=validate.yml -E 'auth_key=|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY' .; then
+            echo 'Sensitive or temporary credential-like content detected.' >&2
+            exit 1
+          fi
+
+      - name: Build and inspect Chrome package
+        run: |
+          ./scripts/package.sh
+          unzip -t dist/ahnu-classroom-video-picker-chrome-mv3.zip
