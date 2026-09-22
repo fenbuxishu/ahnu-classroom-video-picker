@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "AHNU 课堂实录助手",
-  "version": "1.0.1",
-  "description": "在安徽师范大学课堂实录页面总览全部课次与相机视角，勾选后交给浏览器下载。",
-  "permissions": ["downloads"],
+  "version": "1.1.0",
+  "description": "总览安徽师范大学课堂实录的全部课次与相机视角，按需下载并记住已完成记录。",
+  "permissions": ["downloads", "storage"],
   "host_permissions": [
     "https://mlb.ahnu.edu.cn/*",
     "https://dbfw.ahnu.edu.cn/*",

@@ -14,6 +14,7 @@
     selected: new Set(),
     errors: [],
     downloadStates: new Map(),
+    downloadHistory: new Map(),
     loadToken: 0
   };
 
@@ -45,10 +46,11 @@
         <button class="avp-secondary avp-refresh" type="button">重新读取</button>
       </div>
       <div class="avp-filterbar" hidden>
-        <label><input class="avp-select-all" type="checkbox"> 全选</label>
+        <label><input class="avp-select-all" type="checkbox"> 全选未下载</label>
         <button class="avp-chip avp-select-teacher" type="button">选教师相机</button>
         <button class="avp-chip avp-select-student" type="button">选学生相机</button>
         <button class="avp-chip avp-clear" type="button">清空</button>
+        <button class="avp-chip avp-clear-history" type="button" title="只清除当前课程的已下载提示，不删除视频文件">清除下载标记</button>
       </div>
       <main class="avp-body">
         <div class="avp-empty">
@@ -79,6 +81,7 @@
     selectTeacher: $(".avp-select-teacher"),
     selectStudent: $(".avp-select-student"),
     clear: $(".avp-clear"),
+    clearHistory: $(".avp-clear-history"),
     body: $(".avp-body"),
     footerNote: $(".avp-footer-note"),
     download: $(".avp-download")
@@ -175,6 +178,24 @@
     return match ? `${match[1]}-${match[2]}-${match[3]} ${match[4]}` : text || "时间未知";
   };
 
+  const readableCompletedAt = (value) => {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return new Intl.DateTimeFormat("zh-CN", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    }).format(date);
+  };
+
+  const isDownloaded = (key) => state.downloadStates.get(key) === "complete";
+
+  const downloadedCount = () =>
+    [...state.videos.keys()].filter((key) => isDownloaded(key)).length;
+
   const showPanel = (visible) => {
     state.open = visible;
     elements.panel.classList.toggle("is-open", visible);
@@ -209,6 +230,9 @@
   const updateSelectionUi = () => {
     const total = state.videos.size;
     const selected = state.selected.size;
+    const completed = downloadedCount();
+    const pendingKeys = [...state.videos.keys()].filter((key) => !isDownloaded(key));
+    const selectedPending = pendingKeys.filter((key) => state.selected.has(key)).length;
     const totalBytes = [...state.selected]
       .map((key) => state.videos.get(key)?.sizeBytes || 0)
       .reduce((sum, value) => sum + value, 0);
@@ -216,13 +240,16 @@
       (key) => Number(state.videos.get(key)?.sizeBytes) > 0
     );
 
-    elements.selectAll.checked = total > 0 && selected === total;
-    elements.selectAll.indeterminate = selected > 0 && selected < total;
+    elements.selectAll.checked = pendingKeys.length > 0 && selectedPending === pendingKeys.length;
+    elements.selectAll.indeterminate = selectedPending > 0 && selectedPending < pendingKeys.length;
+    elements.selectAll.disabled = pendingKeys.length === 0;
     elements.download.disabled = selected === 0 || state.loading;
     elements.download.textContent = selected ? `下载已选 ${selected} 个视频` : "下载已选视频";
     elements.footerNote.textContent = selected
       ? `已选 ${selected}/${total} 个${knownSizes ? `，约 ${formatBytes(totalBytes)}` : ""}`
-      : "视频会保存到“下载/课堂实录/课程名”文件夹。";
+      : completed
+        ? `已下载 ${completed}/${total} 个；批量选择会自动跳过这些视频。`
+        : "视频会保存到“下载/课堂实录/课程名”文件夹。";
 
     host.querySelectorAll(".avp-video-checkbox").forEach((checkbox) => {
       checkbox.checked = state.selected.has(checkbox.dataset.key);
@@ -237,7 +264,7 @@
 
   const videoStatusLabel = (status) => {
     if (status === "in_progress") return "下载中";
-    if (status === "complete") return "已完成";
+    if (status === "complete") return "已下载";
     if (status === "interrupted") return "已中断";
     if (status === "queued") return "已加入";
     return "";
@@ -247,14 +274,20 @@
     const cards = state.lessons
       .map((lesson) => {
         const videos = [...lesson.teacherCameras, ...lesson.studentCameras];
-        const keys = videos.map((video) => video.key).join(",");
+        const pendingVideos = videos.filter((video) => !isDownloaded(video.key));
+        const keys = pendingVideos.map((video) => video.key).join(",");
+        const completedInLesson = videos.length - pendingVideos.length;
         const rows = videos.length
           ? videos
               .map((video) => {
                 const status = state.downloadStates.get(video.key) || "";
                 const statusLabel = videoStatusLabel(status);
+                const completedAt = readableCompletedAt(
+                  state.downloadHistory.get(video.key)?.completedAt
+                );
+                const statusTitle = completedAt ? `完成于 ${completedAt}` : statusLabel;
                 return `
-                  <label class="avp-video-row" data-category="${escapeHtml(video.category)}">
+                  <label class="avp-video-row ${status === "complete" ? "is-downloaded" : ""}" data-category="${escapeHtml(video.category)}">
                     <input class="avp-video-checkbox" type="checkbox" data-key="${escapeHtml(video.key)}">
                     <span class="avp-camera-icon ${video.category === "教师相机" ? "is-teacher" : "is-student"}">${video.category === "教师相机" ? "师" : "生"}</span>
                     <span class="avp-video-info">
@@ -262,7 +295,7 @@
                       <small>${escapeHtml(video.category)} · 视角 ${escapeHtml(video.viewNum)} · ${formatDuration(video.durationSeconds)}</small>
                     </span>
                     <span class="avp-size" data-size-key="${escapeHtml(video.key)}">${formatBytes(video.sizeBytes)}</span>
-                    ${statusLabel ? `<span class="avp-download-state is-${status}">${escapeHtml(statusLabel)}</span>` : ""}
+                    ${statusLabel ? `<span class="avp-download-state is-${status}" title="${escapeHtml(statusTitle)}">${escapeHtml(statusLabel)}</span>` : ""}
                   </label>
                 `;
               })
@@ -273,14 +306,14 @@
           <article class="avp-lesson-card">
             <div class="avp-lesson-head">
               <label class="avp-lesson-selector">
-                <input class="avp-lesson-checkbox" type="checkbox" data-keys="${escapeHtml(keys)}" ${videos.length ? "" : "disabled"}>
+                <input class="avp-lesson-checkbox" type="checkbox" data-keys="${escapeHtml(keys)}" ${pendingVideos.length ? "" : "disabled"}>
                 <span class="avp-lesson-index">${String(lesson.lessonIndex).padStart(2, "0")}</span>
               </label>
               <div class="avp-lesson-meta">
                 <strong>${escapeHtml(readableDate(lesson.beginTime))}</strong>
                 <span>${lesson.lessonNumber == null ? "" : `第${escapeHtml(lesson.lessonNumber)}节 · `}${escapeHtml(lesson.classroom || "教室未知")}</span>
               </div>
-              <span class="avp-count">${videos.length} 个视角</span>
+              <span class="avp-count">${videos.length} 个视角${completedInLesson ? ` · ${completedInLesson} 已下载` : ""}</span>
             </div>
             <div class="avp-video-list">${rows}</div>
             ${lesson.error ? `<div class="avp-lesson-error">${escapeHtml(lesson.error)}</div>` : ""}
@@ -292,10 +325,11 @@
     elements.body.innerHTML = `<div class="avp-lessons">${cards}</div>`;
     elements.filterbar.hidden = state.videos.size === 0;
     elements.title.textContent = state.courseName || "本课程视频总览";
-    elements.subtitle.textContent = `${state.lessons.length} 个课次 · ${state.videos.size} 个可下载视角`;
+    const completed = downloadedCount();
+    elements.subtitle.textContent = `${state.lessons.length} 个课次 · ${state.videos.size} 个视角 · ${completed} 个已下载`;
     elements.summary.textContent = state.errors.length
       ? `已读取 ${state.lessons.length} 个课次，${state.errors.length} 个课次读取异常`
-      : `已读取全部 ${state.lessons.length} 个课次`;
+      : `已读取全部 ${state.lessons.length} 个课次 · 已下载 ${completed}/${state.videos.size}`;
     updateSelectionUi();
   };
 
@@ -343,6 +377,26 @@
     await Promise.all(Array.from({ length: Math.min(4, videos.length) }, worker));
   };
 
+  const restoreDownloadHistory = async (token) => {
+    const videos = [...state.videos.values()].map(({ key, url }) => ({ key, url }));
+    if (!videos.length) return;
+    try {
+      const response = await chrome.runtime.sendMessage({
+        type: "AHNU_GET_DOWNLOAD_HISTORY",
+        videos
+      });
+      if (token !== state.loadToken) return;
+      for (const [key, record] of Object.entries(response?.records || {})) {
+        if (record?.state !== "complete") continue;
+        state.downloadStates.set(key, "complete");
+        state.downloadHistory.set(key, record);
+        state.selected.delete(key);
+      }
+    } catch {
+      // History is a convenience feature; course browsing should still work without it.
+    }
+  };
+
   const loadCourse = async () => {
     if (!isCoursePage()) {
       elements.filterbar.hidden = true;
@@ -357,6 +411,8 @@
     state.videos.clear();
     state.lessons = [];
     state.errors = [];
+    state.downloadStates.clear();
+    state.downloadHistory.clear();
     elements.filterbar.hidden = true;
     elements.download.disabled = true;
     elements.refresh.disabled = true;
@@ -443,6 +499,9 @@
       if (token !== state.loadToken) return;
       state.courseName = state.lessons.find((lesson) => lesson.courseName)?.courseName || "本课程";
       state.loadedCourseKey = courseKey();
+      setLoadingView("正在核对下载记录", "已下载的视频会自动标记");
+      await restoreDownloadHistory(token);
+      if (token !== state.loadToken) return;
       renderLessons();
       probeSizes([...state.videos.values()], token);
     } catch (error) {
@@ -460,7 +519,7 @@
 
   const selectWhere = (predicate) => {
     for (const [key, video] of state.videos) {
-      if (predicate(video)) state.selected.add(key);
+      if (predicate(video) && !isDownloaded(key)) state.selected.add(key);
     }
     updateSelectionUi();
   };
@@ -471,7 +530,9 @@
   elements.selectAll.addEventListener("change", (event) => {
     state.selected.clear();
     if (event.currentTarget.checked) {
-      for (const key of state.videos.keys()) state.selected.add(key);
+      for (const key of state.videos.keys()) {
+        if (!isDownloaded(key)) state.selected.add(key);
+      }
     }
     updateSelectionUi();
   });
@@ -484,6 +545,36 @@
   elements.clear.addEventListener("click", () => {
     state.selected.clear();
     updateSelectionUi();
+  });
+  elements.clearHistory.addEventListener("click", async () => {
+    const keys = [...state.videos.keys()].filter((key) => isDownloaded(key));
+    if (!keys.length) {
+      elements.footerNote.textContent = "当前课程还没有已下载标记。";
+      return;
+    }
+    const confirmed = window.confirm(
+      `清除当前课程的 ${keys.length} 条下载标记？\n\n这不会删除已经下载的视频文件。`
+    );
+    if (!confirmed) return;
+
+    elements.clearHistory.disabled = true;
+    try {
+      const response = await chrome.runtime.sendMessage({
+        type: "AHNU_CLEAR_DOWNLOAD_HISTORY",
+        keys
+      });
+      if (!response?.ok) throw new Error(response?.error || "清除失败");
+      for (const key of keys) {
+        state.downloadStates.delete(key);
+        state.downloadHistory.delete(key);
+      }
+      renderLessons();
+      elements.footerNote.textContent = `已清除 ${keys.length} 条下载标记，视频文件没有被删除。`;
+    } catch (error) {
+      elements.footerNote.textContent = `清除失败：${error instanceof Error ? error.message : String(error)}`;
+    } finally {
+      elements.clearHistory.disabled = false;
+    }
   });
   elements.body.addEventListener("change", (event) => {
     const target = event.target;
@@ -539,6 +630,8 @@
     }
     if (message?.type === "AHNU_DOWNLOAD_EVENT" && message.key) {
       state.downloadStates.set(message.key, message.state);
+      if (message.record) state.downloadHistory.set(message.key, message.record);
+      if (message.state === "complete") state.selected.delete(message.key);
       if (state.lessons.length) renderLessons();
       if (message.state === "complete") {
         elements.footerNote.textContent = "有视频下载完成，可在 Chrome 下载记录中查看。";

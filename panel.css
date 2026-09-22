@@ -201,6 +201,11 @@
   font-weight: 650;
 }
 
+#ahnu-video-picker .avp-clear-history {
+  margin-left: auto;
+  color: #6b7280;
+}
+
 #ahnu-video-picker input[type="checkbox"] {
   width: 16px;
   height: 16px;
@@ -348,6 +353,15 @@
 
 #ahnu-video-picker .avp-video-row:hover {
   background: #fafbff;
+}
+
+#ahnu-video-picker .avp-video-row.is-downloaded {
+  background: #f2fbf8;
+  box-shadow: inset 3px 0 #19a282;
+}
+
+#ahnu-video-picker .avp-video-row.is-downloaded:hover {
+  background: #eaf8f4;
 }
 
 #ahnu-video-picker .avp-camera-icon {

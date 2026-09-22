@@ -46,22 +46,22 @@
     <rect x="760" y="68" width="422" height="124" fill="url(#panel)"/>
     <text x="784" y="94" fill="#cbd5ff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11" font-weight="700" letter-spacing="1.4">AHNU 课堂实录助手</text>
     <text x="784" y="128" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="23" font-weight="750">示例课程</text>
-    <text x="784" y="153" fill="#d8dcfb" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13">9 个课次 · 18 个可下载视角</text>
+    <text x="784" y="153" fill="#d8dcfb" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13">9 个课次 · 18 个视角 · 1 个已下载</text>
     <circle cx="1142" cy="101" r="17" fill="#fff" opacity=".15"/>
     <path d="M1136 95 L1148 107 M1148 95 L1136 107" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
 
     <rect x="760" y="192" width="422" height="48" fill="#fff"/>
-    <text x="784" y="221" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13">已读取全部 9 个课次</text>
+    <text x="784" y="221" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="13">已读取全部 9 个课次 · 已下载 1/18</text>
     <rect x="1080" y="203" width="78" height="27" rx="7" fill="#fff" stroke="#e1e4ec"/>
     <text x="1093" y="221" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12">重新读取</text>
 
     <rect x="760" y="240" width="422" height="45" fill="#fbfbfd" stroke="#e7e9ef"/>
     <rect x="784" y="255" width="14" height="14" rx="3" fill="#fff" stroke="#b9c0cf"/>
-    <text x="807" y="267" fill="#394156" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="650">全选</text>
-    <rect x="846" y="250" width="82" height="25" rx="7" fill="#fff" stroke="#e1e4ec"/>
-    <text x="857" y="267" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">选教师相机</text>
-    <rect x="936" y="250" width="82" height="25" rx="7" fill="#fff" stroke="#e1e4ec"/>
-    <text x="947" y="267" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">选学生相机</text>
+    <text x="807" y="267" fill="#394156" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="650">全选未下载</text>
+    <rect x="894" y="250" width="82" height="25" rx="7" fill="#fff" stroke="#e1e4ec"/>
+    <text x="905" y="267" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">选教师相机</text>
+    <rect x="984" y="250" width="82" height="25" rx="7" fill="#fff" stroke="#e1e4ec"/>
+    <text x="995" y="267" fill="#475066" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="11">选学生相机</text>
 
     <rect x="776" y="301" width="390" height="154" rx="12" fill="#fff" stroke="#e1e4ec"/>
     <rect x="791" y="318" width="16" height="16" rx="4" fill="#fff" stroke="#b9c0cf"/>
@@ -78,12 +78,15 @@
     <text x="863" y="393" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">视角 1 · 50:00</text>
     <text x="1113" y="383" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">785 MB</text>
     <line x1="792" y1="407" x2="1150" y2="407" stroke="#f0f1f5"/>
+    <rect x="777" y="408" width="389" height="46" fill="#f2fbf8"/>
+    <rect x="777" y="408" width="3" height="46" fill="#19a282"/>
     <rect x="793" y="424" width="15" height="15" rx="3" fill="#fff" stroke="#b9c0cf"/>
     <rect x="821" y="415" width="30" height="30" rx="9" fill="#0a8f74"/>
     <text x="829" y="435" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="800">生</text>
     <text x="863" y="428" fill="#2b3348" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="12" font-weight="700">学生相机1</text>
     <text x="863" y="443" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">视角 3 · 50:07</text>
-    <text x="1113" y="433" fill="#687085" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10">425 MB</text>
+    <rect x="1095" y="421" width="55" height="22" rx="6" fill="#e1f6f0"/>
+    <text x="1105" y="436" fill="#08715e" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif" font-size="10" font-weight="700">已下载</text>
 
     <rect x="776" y="468" width="390" height="82" rx="12" fill="#fff" stroke="#e1e4ec"/>
     <rect x="791" y="486" width="16" height="16" rx="4" fill="#fff" stroke="#b9c0cf"/>
